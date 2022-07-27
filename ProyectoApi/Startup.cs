@@ -42,7 +42,7 @@ namespace ProyectoApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/proyectoapi.json", "ProyectoApi V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProyectoApi V1");
             });
 
             app.UseRouting();
