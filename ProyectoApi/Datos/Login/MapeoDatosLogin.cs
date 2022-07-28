@@ -41,11 +41,13 @@ namespace ProyectoApi.Datos.Login
         private async Task<DataSet> AccessAsyncLogin(AccessRequest Request)
         {
             DataSet Response = new DataSet();
-            using (SqlConnection Connection = new SqlConnection(""))
+            using (SqlConnection Connection = new SqlConnection(Environment.GetEnvironmentVariable(StringHelpers.DataConexion)))
             {
                 try
                 {
-                    SqlCommand Cmd = StringHelpers.ConnectionCommand(Connection, "", true);
+                    SqlCommand Cmd = StringHelpers.ConnectionCommand(Connection, "sp_get_usuario", true);
+                    Cmd.Parameters.Add(new SqlParameter("@i_Usuario", Request.Usuario));
+                    Cmd.Parameters.Add(new SqlParameter("@i_Contrasena", Request.Contrasena));
                     await Connection.OpenAsync();
                     SqlDataAdapter adapter = new SqlDataAdapter(Cmd);
                     adapter.Fill(Response);
