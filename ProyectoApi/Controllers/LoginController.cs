@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using ProyectoApi.Datos;
 using ProyectoApi.Models.Login.Operaciones;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProyectoApi.Controllers
@@ -46,6 +48,24 @@ namespace ProyectoApi.Controllers
             {
                 return Ok(ex);
             }
+        }
+
+        [HttpPost("recetas")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<RecetaResponse>>> getRecetas()
+        {
+            try
+            {
+                List<RecetaResponse> data = await this.mapeoDatosLogin.Recetas();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+
         }
 
         #endregion

@@ -8,6 +8,8 @@ namespace ProyectoApi.Utils
 {
     internal class StringHelpers
     {
+        public static string coneccion = "DATABASE";
+
         public static T ConvertTo<T>(DataTable Dt)
         {
             string JsonString = JsonConvert.SerializeObject(Dt);

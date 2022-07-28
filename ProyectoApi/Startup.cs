@@ -25,6 +25,9 @@ namespace ProyectoApi
             services.AddControllers();
             AddSwagger(services);
 
+            // Configurar cors
+            services.AddCors();
+
             // Configuración de implementaciones de interfaces
             services.AddTransient<IMapeoDatosLogin, MapeoDatosLogin>();
         }
@@ -46,6 +49,11 @@ namespace ProyectoApi
             });
 
             app.UseRouting();
+
+            // Se agrega el cors
+            app.UseCors(
+                options => options.WithOrigins("https://localhost:44395", "http://localhost:63285").AllowAnyHeader().AllowAnyMethod()
+                );
 
             app.UseAuthorization();
 
